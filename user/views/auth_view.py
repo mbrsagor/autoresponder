@@ -19,17 +19,18 @@ class SignInView(LoginView):
     email
     phone_number
     """
+
     authentication_form = LoginForm
     form_class = LoginForm
     redirect_authenticated_user = False
-    template_name = 'auth/signin.html'
+    template_name = "auth/signin.html"
 
     def get_success_url(self):
         url = self.get_redirect_url()
-        return url or resolve_url('/dashboard/')
+        return url or resolve_url("/dashboard/")
 
     def form_valid(self, form):
-        remember_me = form.cleaned_data['remember_me']
+        remember_me = form.cleaned_data["remember_me"]
         login(self.request, form.get_user())
 
         if remember_me:
@@ -45,7 +46,7 @@ class SignOutView(View):
 
     def get(self, request):
         logout(request)
-        return redirect('/user/signin/')
+        return redirect("/user/signin/")
 
 
 @login_required
@@ -56,17 +57,15 @@ def change_password(request):
     :return:
     URL: user/password_change/
     """
-    if request.method == 'POST':
+    if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            messages.success(request, 'Your password was successfully updated!')
-            return redirect('password_change')
+            messages.success(request, "Your password was successfully updated!")
+            return redirect("password_change")
         else:
-            messages.error(request, 'Please correct the error below.')
+            messages.error(request, "Please correct the error below.")
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'auth/change_password.html', {
-        'form': form
-    })
+    return render(request, "auth/change_password.html", {"form": form})

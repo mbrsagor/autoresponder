@@ -7,8 +7,8 @@ from django.utils.encoding import force_str
 
 class ValidationError(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
-    default_detail = ('Invalid input.')
-    default_code = 'invalid'
+    default_detail = "Invalid input."
+    default_code = "invalid"
 
     def __init__(self, detail=None, code=None):
         if detail is None:
@@ -30,21 +30,18 @@ def _get_error_details(data, default_code=None):
     lazy translation strings or strings into `ErrorDetail`.
     """
     if isinstance(data, list):
-        ret = [
-            _get_error_details(item, default_code) for item in data
-        ]
+        ret = [_get_error_details(item, default_code) for item in data]
         if isinstance(data, ReturnList):
             return ReturnList(ret, serializer=data.serializer)
         return ret
     elif isinstance(data, dict):
         ret = {
-            key: _get_error_details(value, default_code)
-            for key, value in data.items()
+            key: _get_error_details(value, default_code) for key, value in data.items()
         }
         if isinstance(data, ReturnDict):
             return ReturnDict(ret, serializer=data.serializer)
         return ret
 
     text = force_str(data)
-    code = getattr(data, 'code', default_code)
+    code = getattr(data, "code", default_code)
     return ErrorDetail(False, code)

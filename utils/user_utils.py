@@ -9,6 +9,7 @@ class UserRole(Enum):
     def get_choices(cls):
         return [(key.value, key.name) for key in cls]
 
+
 class Gender(Enum):
     MAIL = 1
     FEMALE = 2

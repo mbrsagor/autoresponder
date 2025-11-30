@@ -12,7 +12,7 @@ class Timestamp(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ["-created_at"]
         abstract = True
 
 
@@ -21,14 +21,15 @@ class User(AbstractUser, Timestamp):
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=200, unique=True)
     phone = models.CharField(max_length=14, unique=True)
-    role = models.IntegerField(choices=UserRole.get_choices(), default=UserRole.EMPLOYEE.value)
+    role = models.IntegerField(
+        choices=UserRole.get_choices(), default=UserRole.EMPLOYEE.value
+    )
 
     def __str__(self):
         return self.name
 
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name', 'phone']
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["name", "phone"]
 
     objects = UserManager()
 

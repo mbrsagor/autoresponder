@@ -6,7 +6,7 @@ from utils import messages
 
 class NotFound(APIException):
     status_code = status.HTTP_200_OK
-    default_detail = ('bad_request.')
+    default_detail = "bad_request."
     default_code = 200
 
 
@@ -30,11 +30,7 @@ class PosPagination(pagination.PageNumberPagination):
             self.page = paginator.page(page_number)
         except Exception as exc:
             # Here it is
-            msg = {
-                'status': 'fail',
-                'message': exc,
-                'data': []
-            }
+            msg = {"status": "fail", "message": exc, "data": []}
             # print(NotFound(msg))
             raise NotFound(msg)
 
@@ -50,14 +46,10 @@ class PosPagination(pagination.PageNumberPagination):
         next_page = self.get_next_link()
         prev_page = self.get_previous_link()
         if next_page is None and prev_page is None:
-            return response.Response({
-                'status': 'success',
-                'message': messages.DATA_RETURN,
-                'data': data
-            })
+            return response.Response(
+                {"status": "success", "message": messages.DATA_RETURN, "data": data}
+            )
         else:
-            return response.Response({
-                'status': 'success',
-                'message': messages.DATA_RETURN,
-                'data': data
-            })
+            return response.Response(
+                {"status": "success", "message": messages.DATA_RETURN, "data": data}
+            )

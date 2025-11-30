@@ -24,7 +24,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', include('user.urls')), 
+    path("", include("user.urls")),
 ]
 
 if settings.DEBUG:
@@ -32,6 +32,6 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Customization `header`, `site-title`, and `index`
-admin.site.site_header = 'Autoresponder'
-admin.site.site_title = 'Autoresponder'
-admin.site.index_title = 'Welcome to my admin Autoresponder'
+admin.site.site_header = "Autoresponder"
+admin.site.site_title = "Autoresponder"
+admin.site.index_title = "Welcome to my admin Autoresponder"
