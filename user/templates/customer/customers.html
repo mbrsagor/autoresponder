@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Product list {% endblock %}
+
+{% block content %}
+    {% include 'customer/page_header.html' %}
+    <div class="card">
+        <div class="card-header">
+            <div style="display: flex; justify-content: space-between">
+                <h3 class="card-title">Customers</h3>
+                <a class="btn btn-sm btn-info edit-item-btn" href="{% url 'create_customer' %}">Add Customer</a>
+            </div>
+            {% include 'common/message/success_msg.html' %}
+        </div>
+        <div class="card-body">
+            <div id="customerList">
+                <div class="table-responsive table-card mt-3 mb-1">
+                    {% include 'customer/table.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

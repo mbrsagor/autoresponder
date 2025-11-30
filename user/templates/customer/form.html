@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Customer name</label>
+                    {{ form.name }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="email">Customer email</label>
+                    {{ form.email }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="phone">Customer phone number</label>
+                    {{ form.phone }}
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="is_active" class="form-label">Is active</label>
+                    {{ form.is_active }}
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Customer address</label>
+                    {{ form.address }}
+                </div>
+                <div class="mb-2">
+                    <label for="choices-text-input" class="form-label">Customer image</label>
+                    {{ form.avatar }}
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
