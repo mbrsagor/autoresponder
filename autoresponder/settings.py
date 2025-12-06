@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "user",
     "emails",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -160,14 +161,6 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = env("EMAIL_USE_TLS")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 
-# IMAP
-IMAP_HOST = env("IMAP_HOST")
-IMAP_PORT = env("IMAP_PORT")
-IMAP_USER = env("IMAP_USER")
-IMAP_PASSWORD = env("IMAP_PASSWORD")
-IMAP_FOLDER = env("IMAP_FOLDER")
-
-# Celery (basic)
+# Celery 
 CELERY_BROKER_URL = env("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND")
-CELERY_TIMEZONE = "UTC"  # set your timezone if needed

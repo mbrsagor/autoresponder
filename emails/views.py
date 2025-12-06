@@ -1,23 +1,17 @@
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
-import json
-from .models import IncomingEmail
-from .tasks import send_autoreply
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Message
+from .tasks import reply_email_task
 
+class MessageCreateAPI(APIView):
+    def post(self, request):
+        email = request.data.get("email")
+        subject = request.data.get("subject", "No Subject")
+        body = request.data.get("body", "")
 
-@csrf_exempt
-def incoming_webhook(request):
-    payload = request.POST or json.loads(request.body.decode("utf-8") or "{}")
-    from_email = payload.get("from")
-    subject = payload.get("subject")
-    body = payload.get("body-plain") or payload.get("text")
-    message_id = payload.get("Message-Id") or payload.get("message-id") or payload.get("Message-ID")
-    if not message_id:
-        message_id = f"webhook-{int(time.time()*1000)}"
-    obj, created = IncomingEmail.objects.get_or_create(
-        message_id=message_id, defaults={"from_email": from_email, "subject": subject, "body": body}
-    )
+        msg = Message.objects.create(email=email, subject=subject, body=body)
 
-    if created:
-        send_autoreply.apply_async(args=[obj.id], countdown=25*60)
-    return JsonResponse({"ok": True})
+        # Schedule email after 25 minutes (1500 sec)
+        reply_email_task.apply_async(args=[msg.id], countdown=1500)
+
+        return Response({"message": "Received. Auto reply will be sent after 25 min."})
