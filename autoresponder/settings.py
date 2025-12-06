@@ -142,8 +142,8 @@ MESSAGE_TAGS = {
 
 # Auth configuration
 AUTH_USER_MODEL = "user.User"
-LOGIN_URL = "/user/signin/"
-LOGIN_REDIRECT_URL = "user/signin/"
+LOGIN_URL = "/signin/"
+LOGIN_REDIRECT_URL = "signin/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
