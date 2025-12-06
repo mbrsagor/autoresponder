@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "user",
+    "emails",
 ]
 
 MIDDLEWARE = [
@@ -151,9 +152,15 @@ LOGIN_REDIRECT_URL = "signin/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # SMTP CONFIG
-EMAIL_BACKEND = "utils.backend.EmailBackend"
+EMAIL_BACKEND = "utils.backend.EmailBackend"  # Custom email backend
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+
+# Celery (basic)
+CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND")
+CELERY_TIMEZONE = "UTC"  # set your timezone if needed

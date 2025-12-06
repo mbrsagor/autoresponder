@@ -4,6 +4,7 @@ from django.core.mail.backends.smtp import EmailBackend as SMTPBackend
 from django.utils.functional import cached_property
 
 
+# This backend for email sending by SMTP
 class EmailBackend(SMTPBackend):
     @cached_property
     def ssl_context(self):
