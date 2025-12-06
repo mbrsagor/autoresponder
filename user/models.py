@@ -28,6 +28,12 @@ class User(AbstractUser, Timestamp):
     def __str__(self):
         return self.name
 
+    @property
+    def role_name(self):
+        if self.role == 1:
+            return "Admin"
+        return "Employee"
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["name", "phone"]
 
