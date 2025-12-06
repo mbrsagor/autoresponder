@@ -1,7 +1,7 @@
 from celery import shared_task
 from django.core.mail import EmailMessage
 from .models import Message
-from django.utils import timezone
+
 
 @shared_task
 def reply_email_task(msg_id):
